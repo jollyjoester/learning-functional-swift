@@ -21,10 +21,15 @@ struct Ship {
 }
 
 extension Ship {
-    func canSafelyEngageShip(target: Ship) -> Bool {
+    func canSafelyEngageShip1(target: Ship, friendly: Ship) -> Bool {
         let dx = target.position.x - position.x
-        let dy - target.position.y - position.y
+        let dy = target.position.y - position.y
         let targetDistance = sqrt(dx * dx + dy * dy)
-        return targetDistance <= firingRange && targetDistance > unsafeRange
+        
+        let friendlyDx = friendly.position.x - target.position.x
+        let friendlyDy = friendly.position.y - target.position.y
+        let friendlyDistance = sqrt(friendlyDx * friendlyDx + friendlyDy * friendlyDy)
+        
+        return targetDistance <= firingRange && targetDistance > unsafeRange && (friendlyDistance > unsafeRange)
     }
 }
