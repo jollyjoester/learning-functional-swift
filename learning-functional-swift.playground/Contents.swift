@@ -13,3 +13,18 @@ extension Position {
         return sqrt(x * x + y * y) <= range
     }
 }
+
+struct Ship {
+    var position: Position
+    var firingRange: Distance
+    var unsageRange: Distance
+}
+
+extension Ship {
+    func canEngageShip(target: Ship) -> Bool {
+        let dx = target.position.x - position.x
+        let dy - target.position.y - position.y
+        let targetDistance = sqrt(dx * dx + dy * dy)
+        return targetDistance <= firingRange
+    }
+}
